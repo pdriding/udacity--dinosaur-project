@@ -24,12 +24,20 @@ class Animal {
   }
 
   compareHeight(human) {
-    const heightInches = human.weight - this.weight;
-    const heightFoot = heightInches / 12;
-    const height = Number(heightFoot.toFixed(1));
-    return this.height < human.height
-      ? `${human.name} is ${height} feet taller then ${this.species}`
-      : `A ${this.species} is ${height} feet taller then ${human.name}`;
+    // Find difference in inches
+    const heightInches = Math.abs(human.height - this.height);
+
+    // Convert to feet and inches
+    const [heightFeet, heightRemainingInches] = [
+      Math.floor(heightInches / 12),
+      heightInches % 12,
+    ];
+
+    const comparison =
+      this.height < human.height
+        ? `${human.name} is ${heightFeet} feet and ${heightRemainingInches} inches taller then a ${this.species}`
+        : `A ${this.species} is ${heightFeet} feet and ${heightRemainingInches} inches taller then ${human.name}`;
+    return comparison;
   }
 
   compareDiet(human) {
@@ -47,13 +55,13 @@ class Animal {
       string = species[0];
     }
     if (species.length === 2) {
-      string = `${species[0]} and ${species[1]}`;
+      string = `${species[0]} and a ${species[1]}`;
     }
     if (species.length > 2) {
       const lastItem = species.pop();
-      string = `${species.join(", ")}, and ${lastItem}`;
+      string = `${species.join(", ")}, and a ${lastItem}`;
     }
-    return `${human.name} has the same diet as ${string}`;
+    return `${human.name} has the same diet as a ${string}`;
   }
 
   dinoLocation() {
@@ -129,8 +137,8 @@ export const createDinoObject = async function () {
       (dino) =>
         new Dino(
           dino.image,
-          dino.weight,
           dino.height,
+          dino.weight,
           dino.diet,
           dino.species,
           dino.where,
