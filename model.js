@@ -24,13 +24,12 @@ class Animal {
   }
 
   compareHeight(human) {
+    const heightInches = human.weight - this.weight;
+    const heightFoot = heightInches / 12;
+    const height = Number(heightFoot.toFixed(1));
     return this.height < human.height
-      ? `${human.name} is ${human.height - this.height} inches taller then ${
-          this.species
-        }`
-      : `A ${this.species} is ${this.height - human.height} taller then ${
-          human.name
-        }`;
+      ? `${human.name} is ${height} feet taller then ${this.species}`
+      : `A ${this.species} is ${height} feet taller then ${human.name}`;
   }
 
   compareDiet(human) {
