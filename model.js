@@ -100,8 +100,7 @@ class Animal {
       case 6:
         return this.dinoFact();
       default:
-        console.log("Invalid case");
-        // Code to handle an invalid case, if needed
+        console.log("Invalid case try again");
         break;
     }
   }
